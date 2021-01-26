@@ -6,9 +6,9 @@ This library supports various probabilistic analyses of a Bridge deal, for examp
 - Q: "How probable is it that North gets exactly 3 Spades?"
   A: Exactly 1336935171 / 4669217350, or roughly 28.63296%
 - Q: "How probable is it that North gets 2-5 Spades and 3-6 Hearts?"
-  A: FIXME
-- Q: "If North has 3-4 Spades and 2-6 Hearts, how probable is it that they receive 1-7 Clubs?"
-  A: FIXME
+  A: Exactly 437833539 / 738387860, or roughly 59.29587 %
+- Q: "If North has 3-4 Spades and 2-6 Hearts, how probable is it that they receive at least 5 Clubs?"
+  A: Exactly 47039 / 378210, or roughly 12.43727 %
 - Q: "Show me a uniformly randomly sampled deal where North gets 1-3 Clubs, 3-5 Diamonds, 3-7 Hearts, 3-6 Spades, and a total of 12-16 High Point Cards!"
   A: FIXME
 
@@ -40,7 +40,7 @@ Sampling from a discrete distribution with a known CDF (cumulative distribution 
 
 ## Install
 
-FIXME
+You need python 3.7 or newer. No custom packages necessary.
 
 ## Usage
 
@@ -48,16 +48,62 @@ FIXME
 
 Just Python for now
 
-## Performance
+### Examples in the intro
+
+##### Q: "How probable is it that North gets exactly 3 Spades?"
+
+```
+>>> import table
+>>> table.compute_table_1suit()[(3,)]
+Fraction(1336935171, 4669217350)
+>>> float(_)
+0.2863296074662277
+>>>
+```
+
+##### Q: "How probable is it that North gets 2-5 Spades and 3-6 Hearts?"
+
+```
+>>> interesting_entries = table.compute_table_2suits()
+>>> interesting_entries = table.filter_table(interesting_entries, 0, 2, 5)
+>>> interesting_entries = table.filter_table(interesting_entries, 1, 3, 6)
+>>> sum(interesting_entries.values())
+Fraction(437833539, 738387860)
+>>> float(_)
+0.5929587452859801
+>>>
+```
+
+##### Q: "If North has 3-4 Spades and 2-6 Hearts, how probable is it that they receive at least 5 Clubs?"
+
+```
+>>> interesting_entries = table.compute_table_4suits()
+>>> interesting_entries = table.filter_table(interesting_entries, 0, 3, 4)
+>>> interesting_entries = table.filter_table(interesting_entries, 1, 2, 6)
+>>> clubby_entries = table.filter_table(interesting_entries, 2, 5, 13)
+>>> sum(clubby_entries.values()) / sum(interesting_entries.values())
+Fraction(47039, 378210)
+>>> float(_)
+0.12437270299569023
+>>>
+```
+
+##### Q: "Show me a uniformly randomly sampled deal where North gets 1-3 Clubs, 3-5 Diamonds, 3-7 Hearts, 3-6 Spades, and a total of 12-16 High Point Cards!"
 
 FIXME
 
+## Performance
+
+- The naive sampler (which can only sample from *all* deals) written in Python runs at around 10 K/s.
+- The table-based sampler (which can only sample from *suit-constrained* deals) written in Python should run at about the same speed, albeit a bit slower. I expect 9 K/s.
+- The general sampler (which can sample from arbitrary deals) will have to employ Monte Carlo sampling, and has therefore far lower, and unpredictable speed.
+
 If necessary, I may consider rewriting some parts in Rust.
+
+FIXME
 
 ## TODOs
 
-* Probability calculator
-* Table generator
 * Actual sampler
 * Monte-Carlo stuff for the rank conditions
 * Update Readme with actual data

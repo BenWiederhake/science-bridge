@@ -115,6 +115,22 @@ def collapse(table_in, mask):
     return table_out
 
 
+def filter_table(table, suit, count_min, count_max):
+    """
+    Returns a *new* table with only those entries of relevance.
+    Note: The result is not automatically rescaled! You may need to call rescale_table().
+    """
+    return {k: v for k, v in table.items() if count_min <= k[suit] <= count_max}
+
+
+def rescale_table(table):
+    """
+    Returns a *new* table with rescaled entries.
+    """
+    total = sum(table.values())
+    return {k: v / total for k, v in table.items()}
+
+
 def is_consistent(actual, total, expected):
     #print('      KEY: ACTUAL, EXPECTED (EXPECTED) -> CHI SQUARED PART')
     chisq = 0
