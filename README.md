@@ -4,7 +4,7 @@
 
 This library supports various probabilistic analyses of a Bridge deal, for example:
 - Q: "How probable is it that North gets exactly 3 Spades?"
-  A: FIXME
+  A: Exactly 1336935171 / 4669217350, or roughly 28.63296%
 - Q: "How probable is it that North gets 2-5 Spades and 3-6 Hearts?"
   A: FIXME
 - Q: "If North has 3-4 Spades and 2-6 Hearts, how probable is it that they receive 1-7 Clubs?"
