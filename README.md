@@ -9,10 +9,10 @@ This library supports various probabilistic analyses of a Bridge deal, for examp
   A: Exactly 437833539 / 738387860, or roughly 59.29587 %
 - Q: "If North has 3-4 Spades and 2-6 Hearts, how probable is it that they receive at least 5 Clubs?"
   A: Exactly 47039 / 378210, or roughly 12.43727 %
-- Q: "Show me a uniformly randomly sampled deal where North gets 1-3 Clubs, 3-5 Diamonds, 3-7 Hearts, 3-6 Spades!"
+- Q: "Show me a uniformly randomly sampled deal where North gets 1-3 Clubs, 3-5 Diamonds, 3-6 Hearts, 3-6 Spades!"
   A: ♣2 ♣6 ♦3 ♦7 ♦J ♥4 ♥5 ♥9 ♥Q ♠2 ♠3 ♠6 ♠Q   ♣5 ♣9 ♣Q ♣A ♦5 ♦9 ♦⑩ ♦Q ♦K ♥7 ♠7 ♠J ♠A   ♣3 ♣7 ♣⑩ ♣K ♦4 ♥2 ♥3 ♥8 ♥K ♥A ♠4 ♠5 ♠⑩   ♣4 ♣8 ♣J ♦2 ♦6 ♦8 ♦A ♥6 ♥⑩ ♥J ♠8 ♠9 ♠K
 - Q: "Show me a uniformly randomly sampled deal where North gets 1-3 Clubs, 3-5 Diamonds, 3-7 Hearts, 3-6 Spades, and a total of 12-16 High Point Cards!"
-  A: FIXME
+  A: ♣9 ♣A ♦3 ♦6 ♦K ♦A ♥3 ♥Q ♥A ♠9 ♠Q ♠K ♠A   ♣3 ♣5 ♣6 ♣7 ♣Q ♣K ♦2 ♦4 ♦9 ♥5 ♥J ♠6 ♠7   ♣⑩ ♣J ♦5 ♦⑩ ♥2 ♥4 ♥6 ♥8 ♥9 ♠2 ♠3 ♠8 ♠J   ♣2 ♣4 ♣8 ♦7 ♦8 ♦J ♦Q ♥7 ♥⑩ ♥K ♠4 ♠5 ♠⑩
 
 ![A caption of Jesse Pinkman from Breaking Bad saying "Yeah! Science Bridge!"](https://i.imgflip.com/4uzlba.jpg)
 
@@ -53,9 +53,14 @@ You need python 3.7 or newer. No custom packages necessary.
 
 ## Usage
 
-FIXME
+```
+USAGE: ./combined_sampler.py <MIN_MAX_REQS> [<NUM_SAMPLES>]
+MIN_MAX_REQS is 10 integers, 2 for each suit, and 2 for HPC, describing the minimum and maximum interesting amount.
+(Use "0" "99" for "no restriction", and "3" "3" for "exactly 3", etc.)
+NUM_SAMPLES is the number of samples to print. Defaults to 10
+```
 
-Just Python for now
+See below for examples.
 
 ### Examples in the intro
 
@@ -97,7 +102,7 @@ Fraction(47039, 378210)
 >>>
 ```
 
-##### Q: "Show me a uniformly randomly sampled deal where North gets 1-3 Clubs, 3-5 Diamonds, 3-7 Hearts, 3-6 Spades!"
+##### Q: "Show me a uniformly randomly sampled deal where North gets 1-3 Clubs, 3-5 Diamonds, 3-6 Hearts, 3-6 Spades!"
 
 ```
 $ ./table_sampler.py 1 3 3 5 3 7 3 6
@@ -113,11 +118,24 @@ $ ./table_sampler.py 1 3 3 5 3 7 3 6
 ♣3 ♣7 ♣8 ♦2 ♦3 ♦5 ♥5 ♥6 ♥K ♠4 ♠⑩ ♠J ♠A   ♣5 ♣K ♦4 ♦6 ♦8 ♦9 ♦Q ♥4 ♥7 ♥8 ♥A ♠5 ♠6   ♣9 ♣⑩ ♣A ♦⑩ ♦K ♦A ♥3 ♥9 ♥Q ♠3 ♠7 ♠8 ♠K   ♣2 ♣4 ♣6 ♣J ♣Q ♦7 ♦J ♥2 ♥⑩ ♥J ♠2 ♠9 ♠Q
 ```
 
-FIXME
+##### Q: "Show me a uniformly randomly sampled deal where North gets 0-2 Clubs, 3-4 Diamonds, 3-5 Hearts, 3-5 Spades, and a total of 26-30 High Point Cards!"
 
-##### Q: "Show me a uniformly randomly sampled deal where North gets 1-3 Clubs, 3-5 Diamonds, 3-7 Hearts, 3-6 Spades, and a total of 12-16 High Point Cards!"
-
-FIXME
+```
+$ ./combined_sampler.py 0 2 3 4 3 5 3 5 26 30
+♣9 ♣A ♦3 ♦6 ♦K ♦A ♥3 ♥Q ♥A ♠9 ♠Q ♠K ♠A   ♣3 ♣5 ♣6 ♣7 ♣Q ♣K ♦2 ♦4 ♦9 ♥5 ♥J ♠6 ♠7   ♣⑩ ♣J ♦5 ♦⑩ ♥2 ♥4 ♥6 ♥8 ♥9 ♠2 ♠3 ♠8 ♠J   ♣2 ♣4 ♣8 ♦7 ♦8 ♦J ♦Q ♥7 ♥⑩ ♥K ♠4 ♠5 ♠⑩
+iter 1, about 0.6167442001353092/s, about 6253.786189372036 tries/s
+♣A ♦4 ♦9 ♦K ♦A ♥7 ♥8 ♥Q ♥K ♥A ♠8 ♠Q ♠A   ♣3 ♣7 ♣9 ♣J ♣Q ♦J ♦Q ♥6 ♥9 ♠3 ♠4 ♠9 ♠⑩   ♣2 ♣4 ♣⑩ ♦3 ♦6 ♦7 ♦⑩ ♥2 ♥4 ♥⑩ ♠2 ♠5 ♠K   ♣5 ♣6 ♣8 ♣K ♦2 ♦5 ♦8 ♥3 ♥5 ♥J ♠6 ♠7 ♠J
+♣A ♦5 ♦J ♦K ♦A ♥4 ♥J ♥Q ♥K ♥A ♠9 ♠Q ♠A   ♣4 ♣5 ♣6 ♣⑩ ♣J ♦2 ♦9 ♦⑩ ♥2 ♥3 ♥8 ♠4 ♠K   ♣2 ♣3 ♣7 ♣K ♦7 ♦8 ♦Q ♥5 ♥6 ♥⑩ ♠2 ♠6 ♠J   ♣8 ♣9 ♣Q ♦3 ♦4 ♦6 ♥7 ♥9 ♠3 ♠5 ♠7 ♠8 ♠⑩
+♣A ♦7 ♦Q ♦K ♦A ♥6 ♥J ♥K ♥A ♠5 ♠8 ♠Q ♠K   ♣3 ♣4 ♣5 ♣6 ♣9 ♦5 ♦⑩ ♥2 ♥3 ♥5 ♥8 ♠6 ♠J   ♣7 ♣8 ♣J ♣Q ♣K ♦2 ♦J ♥4 ♥7 ♥Q ♠2 ♠7 ♠⑩   ♣2 ♣⑩ ♦3 ♦4 ♦6 ♦8 ♦9 ♥9 ♥⑩ ♠3 ♠4 ♠9 ♠A
+iter 4, about 1.8212818335745224/s, about 6260.352755940159 tries/s
+♣Q ♣A ♦Q ♦K ♦A ♥4 ♥8 ♥Q ♥A ♠2 ♠5 ♠J ♠A   ♣4 ♣6 ♦3 ♦7 ♦9 ♦⑩ ♥2 ♥⑩ ♥J ♠4 ♠8 ♠⑩ ♠K   ♣3 ♣⑩ ♦2 ♦5 ♦J ♥6 ♥7 ♥9 ♠3 ♠6 ♠7 ♠9 ♠Q   ♣2 ♣5 ♣7 ♣8 ♣9 ♣J ♣K ♦4 ♦6 ♦8 ♥3 ♥5 ♥K
+♣K ♣A ♦3 ♦7 ♦Q ♦A ♥8 ♥Q ♥K ♠2 ♠Q ♠K ♠A   ♣J ♣Q ♦6 ♦8 ♦⑩ ♦K ♥9 ♥⑩ ♥J ♥A ♠4 ♠8 ♠J   ♣4 ♣5 ♣6 ♣9 ♦2 ♦4 ♦5 ♦9 ♦J ♥5 ♥7 ♠5 ♠7   ♣2 ♣3 ♣7 ♣8 ♣⑩ ♥2 ♥3 ♥4 ♥6 ♠3 ♠6 ♠9 ♠⑩
+♣4 ♣A ♦5 ♦Q ♦K ♦A ♥7 ♥8 ♥K ♥A ♠J ♠Q ♠K   ♣2 ♣9 ♣⑩ ♣J ♦2 ♦J ♥6 ♥9 ♥⑩ ♠3 ♠4 ♠9 ♠A   ♣5 ♣8 ♦3 ♦4 ♦6 ♦7 ♦9 ♦⑩ ♥2 ♥Q ♠2 ♠7 ♠⑩   ♣3 ♣6 ♣7 ♣Q ♣K ♦8 ♥3 ♥4 ♥5 ♥J ♠5 ♠6 ♠8
+iter 7, about 1.8830095620681435/s, about 6328.795138111031 tries/s
+♣K ♣A ♦4 ♦K ♦A ♥4 ♥J ♥Q ♥A ♠3 ♠8 ♠J ♠A   ♣3 ♣6 ♣7 ♣9 ♣J ♦2 ♦6 ♦J ♥2 ♠2 ♠9 ♠⑩ ♠Q   ♣4 ♣5 ♣8 ♦5 ♦7 ♦8 ♦Q ♥3 ♥6 ♥7 ♥9 ♠7 ♠K   ♣2 ♣⑩ ♣Q ♦3 ♦9 ♦⑩ ♥5 ♥8 ♥⑩ ♥K ♠4 ♠5 ♠6
+♣2 ♣Q ♦J ♦Q ♦A ♥5 ♥J ♥Q ♥K ♥A ♠4 ♠K ♠A   ♣4 ♣8 ♣9 ♣⑩ ♣A ♦3 ♦6 ♦8 ♥7 ♠2 ♠8 ♠⑩ ♠J   ♣J ♦2 ♦4 ♦5 ♦9 ♥3 ♥6 ♥8 ♠3 ♠5 ♠7 ♠9 ♠Q   ♣3 ♣5 ♣6 ♣7 ♣K ♦7 ♦⑩ ♦K ♥2 ♥4 ♥9 ♥⑩ ♠6
+♣Q ♣K ♦J ♦Q ♦K ♦A ♥3 ♥5 ♥K ♥A ♠3 ♠Q ♠K   ♣8 ♦2 ♦3 ♦6 ♦9 ♥4 ♥6 ♥Q ♠4 ♠5 ♠8 ♠J ♠A   ♣4 ♣9 ♣⑩ ♣J ♦7 ♦⑩ ♥7 ♥8 ♥9 ♥⑩ ♠6 ♠7 ♠9   ♣2 ♣3 ♣5 ♣6 ♣7 ♣A ♦4 ♦5 ♦8 ♥2 ♥J ♠2 ♠⑩
+```
 
 ## Performance
 

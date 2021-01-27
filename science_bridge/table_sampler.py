@@ -34,6 +34,10 @@ def print_samples(table_int, n):
 
 def run_with(num_samples, *min_max_reqs):
     assert len(min_max_reqs) == 8
+    tightened_reqs = common.tighten_mmr(min_max_reqs)
+    if tightened_reqs != min_max_reqs:
+        print('Suit requirements tightened from {} to {}'.format(min_max_reqs, tightened_reqs), file=sys.stderr)
+        min_max_reqs = tightened_reqs
     entries = table.compute_table_4suits()
     entries = table.filter_table(entries, 0, min_max_reqs[0], min_max_reqs[1])
     entries = table.filter_table(entries, 1, min_max_reqs[2], min_max_reqs[3])

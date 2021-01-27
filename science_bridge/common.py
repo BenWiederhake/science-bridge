@@ -105,3 +105,98 @@ def sample_deal_4suits(count_4suits):
     deal.extend(remaining_cards)
 
     return deal
+
+
+def count_hpc(cards):
+    return sum(max(0, card_rank(i) - 8) for i in cards)
+
+
+def last_x_slice(l, x):
+    if x == 0:
+        return []
+    assert 0 < x < len(l)
+    return l[-x:]
+
+
+def try_sample_deal_4suits_hpc(count_4suits, min_max_reqs):
+    assert len(count_4suits) == 4
+    assert sum(count_4suits) == 13
+    assert len(min_max_reqs) == 10
+
+    tries = 0
+    while True:
+        tries += 1
+        # `cards_by_suit` is a list of list of cards!
+        cards_by_suit = []
+        min_hpc = 0
+        max_hpc = 0
+        for i in range(4):
+            in_suit = list(range(13 * i, 13 * (i + 1)))
+            shuffle_inplace(in_suit)
+            min_tail = last_x_slice(in_suit, min_max_reqs[i * 2 + 0])
+            max_tail = last_x_slice(in_suit, min_max_reqs[i * 2 + 1])
+            min_hpc += count_hpc(min_tail)
+            max_hpc += count_hpc(max_tail)
+            cards_by_suit.append(in_suit)
+        # If we already know that this shuffling of ranks is impossible in all
+        # cases, independent of the specific count_4suits, then we can retry
+        # immediately without screwing up the probabilities.
+        if min_hpc > min_max_reqs[-1]:
+            # We will definitely overshoot. Retry.
+            pass
+        elif max_hpc < min_max_reqs[-2]:
+            # We will definitely undershoot. Retry.
+            pass
+        else:
+            # This *may* be a good deal.
+            break
+
+    assert len(cards_by_suit) == 4, len(cards_by_suit)
+    deal = []
+    # First, deal North's cards:
+    for suit_idx, suit_count in zip(range(4), count_4suits):
+        # TODO: This looks inefficient
+        for _ in range(suit_count):
+            deal.append(cards_by_suit[suit_idx].pop())
+    assert len(deal) == 13
+
+    # Then, deal the rest randomly:
+    remaining_cards = []
+    for suit_cards in cards_by_suit:
+        remaining_cards.extend(suit_cards)
+    del suit_cards
+    shuffle_inplace(remaining_cards)
+    deal.extend(remaining_cards)
+    assert len(deal) == 52
+    assert set(deal) == set(range(52))
+
+    # Did this mess it up?
+    actual_hpc = count_hpc(deal[:13])
+    assert min_hpc <= actual_hpc <= max_hpc, (tries, actual_hpc, count_4suits, deal)
+    if actual_hpc < min_max_reqs[-2] or actual_hpc > min_max_reqs[-1]:
+        # Yup, we missed the mark. Cannot retry here, or we would mess up the
+        # probability for the current `count_4suits`.
+        return None, tries
+
+    return deal, tries
+
+
+def tighten_mmr(min_max_reqs):
+    min_max_reqs = list(min_max_reqs)  # Copy
+    # There's a better way to compute this.
+    change = True
+    while change:
+        change = False
+        for i in range(4):
+            total_min = min_max_reqs[0] + min_max_reqs[2] + min_max_reqs[4] + min_max_reqs[6]
+            total_max = min_max_reqs[1] + min_max_reqs[3] + min_max_reqs[5] + min_max_reqs[7]
+            alt_min = 13 - (total_max - min_max_reqs[2 * i + 1])
+            if alt_min > min_max_reqs[2 * i + 0]:
+                min_max_reqs[2 * i + 0] = alt_min
+                change = True
+            alt_max = 13 - (total_min - min_max_reqs[2 * i + 0])
+            if alt_max < min_max_reqs[2 * i + 1]:
+                min_max_reqs[2 * i + 1] = alt_max
+                change = True
+
+    return tuple(min_max_reqs)
