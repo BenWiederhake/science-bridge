@@ -10,9 +10,9 @@ This library supports various probabilistic analyses of a Bridge deal, for examp
 - Q: "If North has 3-4 Spades and 2-6 Hearts, how probable is it that they receive at least 5 Clubs?"
   A: Exactly 47039 / 378210, or roughly 12.43727 %
 - Q: "Show me a uniformly randomly sampled deal where North gets 1-3 Clubs, 3-5 Diamonds, 3-6 Hearts, 3-6 Spades!"
-  A: ♣2 ♣6 ♦3 ♦7 ♦J ♥4 ♥5 ♥9 ♥Q ♠2 ♠3 ♠6 ♠Q   ♣5 ♣9 ♣Q ♣A ♦5 ♦9 ♦⑩ ♦Q ♦K ♥7 ♠7 ♠J ♠A   ♣3 ♣7 ♣⑩ ♣K ♦4 ♥2 ♥3 ♥8 ♥K ♥A ♠4 ♠5 ♠⑩   ♣4 ♣8 ♣J ♦2 ♦6 ♦8 ♦A ♥6 ♥⑩ ♥J ♠8 ♠9 ♠K
+  A: ♣2 ♣6 ♦3 ♦7 ♦J ♥4 ♥5 ♥9 ♥Q ♠2 ♠3 ♠6 ♠Q  //  ♣5 ♣9 ♣Q ♣A ♦5 ♦9 ♦⑩ ♦Q ♦K ♥7 ♠7 ♠J ♠A  //  ♣3 ♣7 ♣⑩ ♣K ♦4 ♥2 ♥3 ♥8 ♥K ♥A ♠4 ♠5 ♠⑩  //  ♣4 ♣8 ♣J ♦2 ♦6 ♦8 ♦A ♥6 ♥⑩ ♥J ♠8 ♠9 ♠K
 - Q: "Show me a uniformly randomly sampled deal where North gets 1-3 Clubs, 3-5 Diamonds, 3-7 Hearts, 3-6 Spades, and a total of 12-16 High Point Cards!"
-  A: ♣9 ♣A ♦3 ♦6 ♦K ♦A ♥3 ♥Q ♥A ♠9 ♠Q ♠K ♠A   ♣3 ♣5 ♣6 ♣7 ♣Q ♣K ♦2 ♦4 ♦9 ♥5 ♥J ♠6 ♠7   ♣⑩ ♣J ♦5 ♦⑩ ♥2 ♥4 ♥6 ♥8 ♥9 ♠2 ♠3 ♠8 ♠J   ♣2 ♣4 ♣8 ♦7 ♦8 ♦J ♦Q ♥7 ♥⑩ ♥K ♠4 ♠5 ♠⑩
+  A: ♣9 ♣A ♦3 ♦6 ♦K ♦A ♥3 ♥Q ♥A ♠9 ♠Q ♠K ♠A  //  ♣3 ♣5 ♣6 ♣7 ♣Q ♣K ♦2 ♦4 ♦9 ♥5 ♥J ♠6 ♠7  //  ♣⑩ ♣J ♦5 ♦⑩ ♥2 ♥4 ♥6 ♥8 ♥9 ♠2 ♠3 ♠8 ♠J  //  ♣2 ♣4 ♣8 ♦7 ♦8 ♦J ♦Q ♥7 ♥⑩ ♥K ♠4 ♠5 ♠⑩
 
 ![A caption of Jesse Pinkman from Breaking Bad saying "Yeah! Science Bridge!"](https://i.imgflip.com/4uzlba.jpg)
 
@@ -37,6 +37,8 @@ Here's a uniformly sampled deal:
 - East: ♣4 ♣5 ♦2 ♦3 ♦J ♦A ♥5 ♥7 ♥Q ♥K ♠3 ♠9 ♠J
 - South: ♣3 ♣7 ♣⑩ ♦4 ♦5 ♦8 ♦⑩ ♥6 ♥J ♥A ♠4 ♠6 ♠7
 - West: ♣2 ♣8 ♣9 ♦6 ♦7 ♦9 ♦K ♥3 ♥4 ♥⑩ ♠5 ♠8 ♠K
+
+Or, written a bit shorter: ♣6 ♣J ♣Q ♣K ♣A ♦Q ♥2 ♥8 ♥9 ♠2 ♠⑩ ♠Q ♠A  //  ♣4 ♣5 ♦2 ♦3 ♦J ♦A ♥5 ♥7 ♥Q ♥K ♠3 ♠9 ♠J  //  ♣3 ♣7 ♣⑩ ♦4 ♦5 ♦8 ♦⑩ ♥6 ♥J ♥A ♠4 ♠6 ♠7  //  ♣2 ♣8 ♣9 ♦6 ♦7 ♦9 ♦K ♥3 ♥4 ♥⑩ ♠5 ♠8 ♠K.
 
 A deal is an assignment of the 52 cards in a deck to the 4 players such that
 each player receives 13 cards; the ordering of cards of a player's hand does
