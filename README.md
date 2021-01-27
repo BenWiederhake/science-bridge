@@ -57,7 +57,8 @@ You need python 3.7 or newer. No custom packages necessary.
 
 ```
 USAGE: ./combined_sampler.py <MIN_MAX_REQS> [<NUM_SAMPLES>]
-MIN_MAX_REQS is 10 integers, 2 for each suit, and 2 for HPC, describing the minimum and maximum interesting amount.
+MIN_MAX_REQS is 10 integers, 2 for each suit, and 2 for HPC,
+describing the minimum and maximum interesting amount.
 (Use "0" "99" for "no restriction", and "3" "3" for "exactly 3", etc.)
 NUM_SAMPLES is the number of samples to print. Defaults to 10
 ```
@@ -170,7 +171,7 @@ Feel free to dive in! [Open an issue](https://github.com/BenWiederhake/science-b
 
 ## License
 
-[Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) ](https://creativecommons.org/licenses/by-nc-nd/4.0/).
+[Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)](https://creativecommons.org/licenses/by-nc-nd/4.0/).
 
 In particular, note that you may not use the material for commercial purposes.
 Feel free to [contact](https://github.com/BenWiederhake/science-bridge/issues/new) me with offers.

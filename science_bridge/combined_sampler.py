@@ -71,7 +71,8 @@ if __name__ == '__main__':
         run_with(int(sys.argv[-1]), *(int(x) for x in sys.argv[1:11]))
     else:
         print('USAGE: {} <MIN_MAX_REQS> [<NUM_SAMPLES>]'.format(sys.argv[0]), file=sys.stderr)
-        print('MIN_MAX_REQS is 10 integers, 2 for each suit, and 2 for HPC, describing the minimum and maximum interesting amount.', file=sys.stderr)
+        print('MIN_MAX_REQS is 10 integers, 2 for each suit, and 2 for HPC,', file=sys.stderr)
+        print('describing the minimum and maximum interesting amount.', file=sys.stderr)
         print('(Use "0" "99" for "no restriction", and "3" "3" for "exactly 3", etc.)', file=sys.stderr)
         print('NUM_SAMPLES is the number of samples to print. Defaults to {}'.format(DEFAULT_NUM_SAMPLES), file=sys.stderr)
         exit(1)
