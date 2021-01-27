@@ -2,6 +2,8 @@
 # -*- encoding=utf-8 -*-
 
 import fractions
+import random
+import secrets
 
 SUITS = '♣♦♥♠'
 RANKS = '23456789⑩JQKA'
@@ -62,4 +64,44 @@ def card_to_string(card_idx):
 
 def deal_to_string(deal):
     assert len(deal) == 52
-    return ' '.join(card_to_string(card) for card in deal)
+    display_deal = []
+    for hand in range(4):
+        hand_cards = deal[13 * hand:13 * (hand + 1)]
+        hand_cards.sort()
+        display_deal.append(hand_cards)
+    return '   '.join(' '.join(card_to_string(card) for card in hand) for hand in display_deal)
+
+
+def shuffle_inplace(l):
+    # Why is this being deprecated, and how to generate secure shuffles?
+    random.shuffle(l, secrets.SystemRandom().random)
+
+
+def sample_deal_4suits(count_4suits):
+    assert len(count_4suits) == 4
+    assert sum(count_4suits) == 13
+
+    cards_by_suit = []
+    for i in range(4):
+        in_suit = list(range(13 * i, 13 * (i + 1)))
+        shuffle_inplace(in_suit)
+        cards_by_suit.append(in_suit)
+    # `cards_by_suit` is a list of list of cards!
+
+    deal = []
+    # First, deal North's cards:
+    for suit_idx, suit_count in zip(range(4), count_4suits):
+        # TODO: This looks inefficient
+        for _ in range(suit_count):
+            deal.append(cards_by_suit[suit_idx].pop())
+    assert len(deal) == 13
+
+    # Then, deal the rest randomly:
+    remaining_cards = []
+    for suit_cards in cards_by_suit:
+        remaining_cards.extend(suit_cards)
+    del suit_cards
+    shuffle_inplace(remaining_cards)
+    deal.extend(remaining_cards)
+
+    return deal

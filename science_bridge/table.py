@@ -6,6 +6,7 @@ import fractions
 import json
 import math
 import os
+import secrets
 
 
 CHI_QUANTILE_STEPS = [0.002, 0.02, 0.05, 0.1, 0.2, 0.8, 0.9, 0.95, 0.98, 0.998]
@@ -118,17 +119,49 @@ def collapse(table_in, mask):
 def filter_table(table, suit, count_min, count_max):
     """
     Returns a *new* table with only those entries of relevance.
-    Note: The result is not automatically rescaled! You may need to call rescale_table().
+    Note: The result is not automatically rescaled! You may need to call rescale_table_1().
     """
     return {k: v for k, v in table.items() if count_min <= k[suit] <= count_max}
 
 
-def rescale_table(table):
+def rescale_table_1(table):
     """
-    Returns a *new* table with rescaled entries.
+    Returns a *new* table with rescaled entries, such that the total probability is 1.
     """
     total = sum(table.values())
     return {k: v / total for k, v in table.items()}
+
+
+def scm(a, b):
+    return (a * b) // math.gcd(a, b)
+
+
+def rescale_table_int(table_in):
+    """
+    Returns a *new* table with rescaled entries, such that all "probabilities" are
+    integers. The total probability is permitted to be arbitrarily high (usually 635013559600).
+    """
+    total_scm = 1
+    for value in table_in.values():
+        total_scm = scm(total_scm, value.denominator)
+    table_out = dict()
+    for k, v in table_in.items():
+        rescaled_v = v * total_scm
+        assert rescaled_v.denominator == 1
+        table_out[k] = rescaled_v.numerator
+    return table_out
+
+
+def sample_table_int(table_int):
+    total = sum(table_int.values())
+    assert isinstance(total, int)
+    chosen = secrets.randbelow(total)
+    remaining = chosen
+    for k, v in table_int.items():
+        if remaining < v:
+            return k
+        remaining -= v
+    raise AssertionError('Still have {} remaining after chose {} out of {}?!'.format(remaining, chosen, total))
 
 
 def is_consistent(actual, total, expected):

@@ -15,8 +15,7 @@ INCREMENT = 10000
 def generate_deals():
     l = list(range(52))
     while True:
-        # Why is this being deprecated, and how to generate secure shuffles?
-        random.shuffle(l, secrets.SystemRandom().random)
+        common.shuffle_inplace(l)
         yield l
         assert len(l) == 52, 'Ey!'
 
@@ -26,6 +25,7 @@ def do_time_self():
     new_time = time.time()
     suit_counts = collections.Counter()
     filename = time.strftime('empiric_counts_%s.json')
+    print('Writing to {}'.format(filename))
     total = 0
     while True:
         for _ in range(INCREMENT):
