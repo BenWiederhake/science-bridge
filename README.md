@@ -118,20 +118,22 @@ $ ./table_sampler.py 1 3 3 5 3 7 3 6
 ♣3 ♣7 ♣8 ♦2 ♦3 ♦5 ♥5 ♥6 ♥K ♠4 ♠⑩ ♠J ♠A   ♣5 ♣K ♦4 ♦6 ♦8 ♦9 ♦Q ♥4 ♥7 ♥8 ♥A ♠5 ♠6   ♣9 ♣⑩ ♣A ♦⑩ ♦K ♦A ♥3 ♥9 ♥Q ♠3 ♠7 ♠8 ♠K   ♣2 ♣4 ♣6 ♣J ♣Q ♦7 ♦J ♥2 ♥⑩ ♥J ♠2 ♠9 ♠Q
 ```
 
+The advantage of `table_sampler.py` over `combined_sampler.py` is that it may be slightly faster.
+For some extra speed, edit `FORMAT = 'str'` to `FORMAT = 'int'`, and do the translation yourself somewhere else in the pipeline. See `common.card_rank()` and `common.card_suit()` for the interpretation of the numbers.
+
+<!-- The numbers, Jason, what do they mean?! -->
+
 ##### Q: "Show me a uniformly randomly sampled deal where North gets 0-2 Clubs, 3-4 Diamonds, 3-5 Hearts, 3-5 Spades, and a total of 26-30 High Point Cards!"
 
 ```
 $ ./combined_sampler.py 0 2 3 4 3 5 3 5 26 30
 ♣9 ♣A ♦3 ♦6 ♦K ♦A ♥3 ♥Q ♥A ♠9 ♠Q ♠K ♠A   ♣3 ♣5 ♣6 ♣7 ♣Q ♣K ♦2 ♦4 ♦9 ♥5 ♥J ♠6 ♠7   ♣⑩ ♣J ♦5 ♦⑩ ♥2 ♥4 ♥6 ♥8 ♥9 ♠2 ♠3 ♠8 ♠J   ♣2 ♣4 ♣8 ♦7 ♦8 ♦J ♦Q ♥7 ♥⑩ ♥K ♠4 ♠5 ♠⑩
-iter 1, about 0.6167442001353092/s, about 6253.786189372036 tries/s
 ♣A ♦4 ♦9 ♦K ♦A ♥7 ♥8 ♥Q ♥K ♥A ♠8 ♠Q ♠A   ♣3 ♣7 ♣9 ♣J ♣Q ♦J ♦Q ♥6 ♥9 ♠3 ♠4 ♠9 ♠⑩   ♣2 ♣4 ♣⑩ ♦3 ♦6 ♦7 ♦⑩ ♥2 ♥4 ♥⑩ ♠2 ♠5 ♠K   ♣5 ♣6 ♣8 ♣K ♦2 ♦5 ♦8 ♥3 ♥5 ♥J ♠6 ♠7 ♠J
 ♣A ♦5 ♦J ♦K ♦A ♥4 ♥J ♥Q ♥K ♥A ♠9 ♠Q ♠A   ♣4 ♣5 ♣6 ♣⑩ ♣J ♦2 ♦9 ♦⑩ ♥2 ♥3 ♥8 ♠4 ♠K   ♣2 ♣3 ♣7 ♣K ♦7 ♦8 ♦Q ♥5 ♥6 ♥⑩ ♠2 ♠6 ♠J   ♣8 ♣9 ♣Q ♦3 ♦4 ♦6 ♥7 ♥9 ♠3 ♠5 ♠7 ♠8 ♠⑩
 ♣A ♦7 ♦Q ♦K ♦A ♥6 ♥J ♥K ♥A ♠5 ♠8 ♠Q ♠K   ♣3 ♣4 ♣5 ♣6 ♣9 ♦5 ♦⑩ ♥2 ♥3 ♥5 ♥8 ♠6 ♠J   ♣7 ♣8 ♣J ♣Q ♣K ♦2 ♦J ♥4 ♥7 ♥Q ♠2 ♠7 ♠⑩   ♣2 ♣⑩ ♦3 ♦4 ♦6 ♦8 ♦9 ♥9 ♥⑩ ♠3 ♠4 ♠9 ♠A
-iter 4, about 1.8212818335745224/s, about 6260.352755940159 tries/s
 ♣Q ♣A ♦Q ♦K ♦A ♥4 ♥8 ♥Q ♥A ♠2 ♠5 ♠J ♠A   ♣4 ♣6 ♦3 ♦7 ♦9 ♦⑩ ♥2 ♥⑩ ♥J ♠4 ♠8 ♠⑩ ♠K   ♣3 ♣⑩ ♦2 ♦5 ♦J ♥6 ♥7 ♥9 ♠3 ♠6 ♠7 ♠9 ♠Q   ♣2 ♣5 ♣7 ♣8 ♣9 ♣J ♣K ♦4 ♦6 ♦8 ♥3 ♥5 ♥K
 ♣K ♣A ♦3 ♦7 ♦Q ♦A ♥8 ♥Q ♥K ♠2 ♠Q ♠K ♠A   ♣J ♣Q ♦6 ♦8 ♦⑩ ♦K ♥9 ♥⑩ ♥J ♥A ♠4 ♠8 ♠J   ♣4 ♣5 ♣6 ♣9 ♦2 ♦4 ♦5 ♦9 ♦J ♥5 ♥7 ♠5 ♠7   ♣2 ♣3 ♣7 ♣8 ♣⑩ ♥2 ♥3 ♥4 ♥6 ♠3 ♠6 ♠9 ♠⑩
 ♣4 ♣A ♦5 ♦Q ♦K ♦A ♥7 ♥8 ♥K ♥A ♠J ♠Q ♠K   ♣2 ♣9 ♣⑩ ♣J ♦2 ♦J ♥6 ♥9 ♥⑩ ♠3 ♠4 ♠9 ♠A   ♣5 ♣8 ♦3 ♦4 ♦6 ♦7 ♦9 ♦⑩ ♥2 ♥Q ♠2 ♠7 ♠⑩   ♣3 ♣6 ♣7 ♣Q ♣K ♦8 ♥3 ♥4 ♥5 ♥J ♠5 ♠6 ♠8
-iter 7, about 1.8830095620681435/s, about 6328.795138111031 tries/s
 ♣K ♣A ♦4 ♦K ♦A ♥4 ♥J ♥Q ♥A ♠3 ♠8 ♠J ♠A   ♣3 ♣6 ♣7 ♣9 ♣J ♦2 ♦6 ♦J ♥2 ♠2 ♠9 ♠⑩ ♠Q   ♣4 ♣5 ♣8 ♦5 ♦7 ♦8 ♦Q ♥3 ♥6 ♥7 ♥9 ♠7 ♠K   ♣2 ♣⑩ ♣Q ♦3 ♦9 ♦⑩ ♥5 ♥8 ♥⑩ ♥K ♠4 ♠5 ♠6
 ♣2 ♣Q ♦J ♦Q ♦A ♥5 ♥J ♥Q ♥K ♥A ♠4 ♠K ♠A   ♣4 ♣8 ♣9 ♣⑩ ♣A ♦3 ♦6 ♦8 ♥7 ♠2 ♠8 ♠⑩ ♠J   ♣J ♦2 ♦4 ♦5 ♦9 ♥3 ♥6 ♥8 ♠3 ♠5 ♠7 ♠9 ♠Q   ♣3 ♣5 ♣6 ♣7 ♣K ♦7 ♦⑩ ♦K ♥2 ♥4 ♥9 ♥⑩ ♠6
 ♣Q ♣K ♦J ♦Q ♦K ♦A ♥3 ♥5 ♥K ♥A ♠3 ♠Q ♠K   ♣8 ♦2 ♦3 ♦6 ♦9 ♥4 ♥6 ♥Q ♠4 ♠5 ♠8 ♠J ♠A   ♣4 ♣9 ♣⑩ ♣J ♦7 ♦⑩ ♥7 ♥8 ♥9 ♥⑩ ♠6 ♠7 ♠9   ♣2 ♣3 ♣5 ♣6 ♣7 ♣A ♦4 ♦5 ♦8 ♥2 ♥J ♠2 ♠⑩
@@ -140,18 +142,17 @@ iter 7, about 1.8830095620681435/s, about 6328.795138111031 tries/s
 ## Performance
 
 - The naive sampler (which can only sample from *all* deals) written in Python runs at around 10 K/s.
-- The table-based sampler (which can only sample from *suit-constrained* deals) written in Python should run at about the same speed, albeit a bit slower. I expect 9 K/s.
-- The general sampler (which can sample from arbitrary deals) will have to employ Monte Carlo sampling, and has therefore far lower, and unpredictable speed.
+- The table-based sampler (which can only sample from *suit-constrained* deals) written in Python should runs at around 4.3 K/s. (Unless you force unicode output, then it drops to around 3.5 K/s.)
+- The general sampler (which can sample from arbitrary deals) has to employ Monte Carlo sampling, and therefore has a far lower, unpredictable speed.
+  * For lax HPC constraints it outputs at around 3.2-3.6 K/s (depending on output method)
+  * For difficult HPC constraints it tries around 6300 deals per second.
 
-If necessary, I may consider rewriting some parts in Rust.
-
-FIXME
+Rewrite it in Rust to make it faster. (Especially the naive sampler should be able to achieve at least 1 M/s.)
 
 ## TODOs
 
-* Actual sampler
-* Monte-Carlo stuff for the rank conditions
-* Update Readme with actual data
+* ???
+* Profit
 
 ## NOTDOs
 

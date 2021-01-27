@@ -8,7 +8,7 @@ import sys
 import table
 import time
 
-FORMAT = 'int'  # 'None' or 'int' or 'str'
+FORMAT = 'str'  # 'None' or 'int' or 'str'
 
 DEFAULT_NUM_SAMPLES = 10
 
