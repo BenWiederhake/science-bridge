@@ -2,17 +2,25 @@
 
 > Combining Science and the card game Bridge since right now.
 
-This library supports various probabilistic analyses of a Bridge deal, for example:
+Analyze probabilistic questions about card distribution in a game of Bridge. For example:
+
 - Q: "How probable is it that North gets exactly 3 Spades?"
+
   A: Exactly 1336935171 / 4669217350, or roughly 28.63296%
 - Q: "How probable is it that North gets 2-5 Spades and 3-6 Hearts?"
-  A: Exactly 437833539 / 738387860, or roughly 59.29587 %
+
+  A: Exactly 437833539 / 738387860, or roughly 59.29587%
 - Q: "If North has 3-4 Spades and 2-6 Hearts, how probable is it that they receive at least 5 Clubs?"
-  A: Exactly 47039 / 378210, or roughly 12.43727 %
+
+  A: Exactly 47039 / 378210, or roughly 12.43727%
 - Q: "Show me a uniformly randomly sampled deal where North gets 1-3 Clubs, 3-5 Diamonds, 3-6 Hearts, 3-6 Spades!"
+
   A: ♣2 ♣6 ♦3 ♦7 ♦J ♥4 ♥5 ♥9 ♥Q ♠2 ♠3 ♠6 ♠Q  //  ♣5 ♣9 ♣Q ♣A ♦5 ♦9 ♦⑩ ♦Q ♦K ♥7 ♠7 ♠J ♠A  //  ♣3 ♣7 ♣⑩ ♣K ♦4 ♥2 ♥3 ♥8 ♥K ♥A ♠4 ♠5 ♠⑩  //  ♣4 ♣8 ♣J ♦2 ♦6 ♦8 ♦A ♥6 ♥⑩ ♥J ♠8 ♠9 ♠K
 - Q: "Show me a uniformly randomly sampled deal where North gets 1-3 Clubs, 3-5 Diamonds, 3-7 Hearts, 3-6 Spades, and a total of 12-16 High Point Cards!"
+
   A: ♣9 ♣A ♦3 ♦6 ♦K ♦A ♥3 ♥Q ♥A ♠9 ♠Q ♠K ♠A  //  ♣3 ♣5 ♣6 ♣7 ♣Q ♣K ♦2 ♦4 ♦9 ♥5 ♥J ♠6 ♠7  //  ♣⑩ ♣J ♦5 ♦⑩ ♥2 ♥4 ♥6 ♥8 ♥9 ♠2 ♠3 ♠8 ♠J  //  ♣2 ♣4 ♣8 ♦7 ♦8 ♦J ♦Q ♥7 ♥⑩ ♥K ♠4 ♠5 ♠⑩
+
+Coming up with all of the math behind this was so much fun :D
 
 ![A caption of Jesse Pinkman from Breaking Bad saying "Yeah! Science Bridge!"](https://i.imgflip.com/4uzlba.jpg)
 
